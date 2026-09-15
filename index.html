@@ -24,7 +24,7 @@ header p { font-size: 13px; color: var(--muted); }
 .card .price { font-size: 14px; font-weight: bold; color: var(--accent); margin-bottom: 8px; }
 .card button { background: var(--accent); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
 footer { position: fixed; bottom: 0; left: 0; right: 0; background: #101a2c; border-top: 1px solid #1e2a44; padding: 12px; text-align: center; font-size: 12px; color: var(--muted); }
-footer a { color: var(--accent); text-decoration: none; }
+footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
 .toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; z-index: 999; opacity: 0; transition: opacity 0.3s; }
 .toast.show { opacity: 1; }
 </style>
@@ -37,7 +37,7 @@ footer a { color: var(--accent); text-decoration: none; }
 <div class="categories" id="categories"></div>
 <div class="products" id="products"></div>
 <footer>
-  پشتیبانی: <a href="https://t.me/manager_1smart1">@manager_1smart1</a>
+  پشتیبانی: <a onclick="openSupport()">@manager_1smart1</a>
 </footer>
 
 <script>
@@ -70,6 +70,8 @@ const categories = [
   { key:"Premium", label:"پرمیوم" },
   { key:"Gift", label:"گیفت‌کارت" },
 ];
+
+const SUPPORT_USERNAME = "manager_1smart1";
 
 let activeCat = "all";
 
@@ -108,6 +110,34 @@ function renderProducts() {
   }).join('');
 }
 
+function openTelegram(username, text) {
+  const encodedText = text ? encodeURIComponent(text) : '';
+  const httpsUrl = 'https://t.me/' + username + (encodedText ? '?text=' + encodedText : '');
+  const tgUrl = 'tg://resolve?domain=' + username + (encodedText ? '&text=' + encodedText : '');
+
+  // روش ۱: تلگرام WebApp API
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(httpsUrl);
+      return true;
+    }
+  } catch(e) { console.log('Method 1 failed:', e); }
+
+  // روش ۲: tg:// protocol
+  try {
+    window.location.href = tgUrl;
+    return true;
+  } catch(e) { console.log('Method 2 failed:', e); }
+
+  // روش ۳: fallback
+  try {
+    window.location.href = httpsUrl;
+    return true;
+  } catch(e) { console.log('Method 3 failed:', e); }
+
+  return false;
+}
+
 function order(name) {
   const toast = document.createElement('div');
   toast.className = 'toast';
@@ -115,33 +145,25 @@ function order(name) {
   document.body.appendChild(toast);
   setTimeout(() => toast.classList.add('show'), 10);
 
-  const url = 'https://t.me/manager_1smart1?text=' + encodeURIComponent('سلام، برای سفارش ' + name + ' راهنمایی می‌خوام');
-
-  let opened = false;
-
-  // روش ۱: Telegram WebApp API
-  try {
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-      window.Telegram.WebApp.openTelegramLink(url);
-      opened = true;
-    }
-  } catch(e) {
-    console.log('Telegram API error:', e);
-  }
-
-  // روش ۲: اگر روش اول کار نکرد
-  if (!opened) {
-    try {
-      window.open(url, '_blank');
-    } catch(e) {
-      window.location.href = url;
-    }
-  }
+  const text = 'سلام، برای سفارش ' + name + ' راهنمایی می‌خوام';
+  openTelegram(SUPPORT_USERNAME, text);
 
   setTimeout(() => {
-    if (document.body.contains(toast)) {
-      document.body.removeChild(toast);
-    }
+    if (document.body.contains(toast)) document.body.removeChild(toast);
+  }, 2000);
+}
+
+function openSupport() {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = '⏳ در حال باز کردن پشتیبانی...';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 10);
+
+  openTelegram(SUPPORT_USERNAME, 'سلام، نیاز به پشتیبانی دارم');
+
+  setTimeout(() => {
+    if (document.body.contains(toast)) document.body.removeChild(toast);
   }, 2000);
 }
 
