@@ -16,14 +16,17 @@ header p { font-size: 13px; color: var(--muted); }
 .cat-btn { background: var(--card); color: var(--text); border: 1px solid #23314d; padding: 8px 14px; border-radius: 20px; white-space: nowrap; font-size: 13px; cursor: pointer; }
 .cat-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
 .products { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
-.card { background: var(--card); border-radius: 16px; padding: 12px; border: 1px solid #1e2a44; display: flex; flex-direction: column; }
+.card { background: var(--card); border-radius: 16px; padding: 12px; border: 1px solid #1e2a44; display: flex; flex-direction: column; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+.card:active { transform: scale(0.97); border-color: var(--accent); }
 .card .icon { font-size: 32px; text-align: center; margin-bottom: 8px; }
 .card h3 { font-size: 14px; margin-bottom: 6px; }
 .card p { font-size: 12px; color: var(--muted); margin-bottom: 8px; flex: 1; }
 .card .price { font-size: 14px; font-weight: bold; color: var(--accent); margin-bottom: 8px; }
-.card button { background: var(--accent); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+.card button { background: var(--accent); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
 footer { position: fixed; bottom: 0; left: 0; right: 0; background: #101a2c; border-top: 1px solid #1e2a44; padding: 12px; text-align: center; font-size: 12px; color: var(--muted); }
 footer a { color: var(--accent); text-decoration: none; }
+.toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #000; padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; z-index: 999; opacity: 0; transition: opacity 0.3s; }
+.toast.show { opacity: 1; }
 </style>
 </head>
 <body>
@@ -91,30 +94,61 @@ function formatPrice(p) {
 function renderProducts() {
   const el = document.getElementById('products');
   const list = activeCat === 'all' ? products : products.filter(p => p.cat === activeCat);
-  el.innerHTML = list.map(p => `
-    <div class="card">
+  el.innerHTML = list.map(p => {
+    const safeName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    return `
+    <div class="card" onclick="order('${safeName}')">
       <div class="icon">${p.icon}</div>
       <h3>${p.name}</h3>
       <p>${p.desc}</p>
       <div class="price">${formatPrice(p.price)}</div>
-      <button onclick="order('${p.name}')">🛒 سفارش</button>
+      <button>🛒 سفارش</button>
     </div>
-  `).join('');
+  `;
+  }).join('');
 }
 
 function order(name) {
-  const url = `https://t.me/manager_1smart1?text=${encodeURIComponent('سلام، برای سفارش ' + name + ' راهنمایی می‌خوام')}`;
-  if (window.Telegram && Telegram.WebApp) {
-    Telegram.WebApp.openTelegramLink(url);
-  } else {
-    window.open(url, '_blank');
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = '⏳ در حال انتقال به پشتیبانی...';
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 10);
+
+  const url = 'https://t.me/manager_1smart1?text=' + encodeURIComponent('سلام، برای سفارش ' + name + ' راهنمایی می‌خوام');
+
+  let opened = false;
+
+  // روش ۱: Telegram WebApp API
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(url);
+      opened = true;
+    }
+  } catch(e) {
+    console.log('Telegram API error:', e);
   }
+
+  // روش ۲: اگر روش اول کار نکرد
+  if (!opened) {
+    try {
+      window.open(url, '_blank');
+    } catch(e) {
+      window.location.href = url;
+    }
+  }
+
+  setTimeout(() => {
+    if (document.body.contains(toast)) {
+      document.body.removeChild(toast);
+    }
+  }, 2000);
 }
 
 renderCategories();
 renderProducts();
 
-if (window.Telegram && Telegram.WebApp) {
+if (window.Telegram && window.Telegram.WebApp) {
   Telegram.WebApp.ready();
   Telegram.WebApp.expand();
 }
