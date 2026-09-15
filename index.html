@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>One Smart Shop</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root { --bg:#0b1220; --card:#121c2e; --accent:#f5b301; --text:#e8eefc; --muted:#8da2c0; }
+* { box-sizing: border-box; margin:0; padding:0; }
+body { font-family: Tahoma, sans-serif; background: var(--bg); color: var(--text); padding-bottom: 80px; }
+header { padding: 20px; text-align: center; background: linear-gradient(180deg, #101a2c, #0b1220); border-bottom: 1px solid #1e2a44; }
+header h1 { font-size: 22px; color: var(--accent); margin-bottom: 6px; }
+header p { font-size: 13px; color: var(--muted); }
+.categories { display: flex; gap: 8px; overflow-x: auto; padding: 12px; position: sticky; top: 0; background: var(--bg); z-index: 10; border-bottom: 1px solid #1e2a44; }
+.cat-btn { background: var(--card); color: var(--text); border: 1px solid #23314d; padding: 8px 14px; border-radius: 20px; white-space: nowrap; font-size: 13px; cursor: pointer; }
+.cat-btn.active { background: var(--accent); color: #000; border-color: var(--accent); font-weight: bold; }
+.products { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 12px; }
+.card { background: var(--card); border-radius: 16px; padding: 12px; border: 1px solid #1e2a44; display: flex; flex-direction: column; }
+.card .icon { font-size: 32px; text-align: center; margin-bottom: 8px; }
+.card h3 { font-size: 14px; margin-bottom: 6px; }
+.card p { font-size: 12px; color: var(--muted); margin-bottom: 8px; flex: 1; }
+.card .price { font-size: 14px; font-weight: bold; color: var(--accent); margin-bottom: 8px; }
+.card button { background: var(--accent); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+footer { position: fixed; bottom: 0; left: 0; right: 0; background: #101a2c; border-top: 1px solid #1e2a44; padding: 12px; text-align: center; font-size: 12px; color: var(--muted); }
+footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>One Smart Shop</h1>
+  <p>خرید آنی سرویس‌های VPN و هوش مصنوعی</p>
+</header>
+<div class="categories" id="categories"></div>
+<div class="products" id="products"></div>
+<footer>
+  پشتیبانی: <a href="https://t.me/manager_1smart1">@manager_1smart1</a>
+</footer>
+
+<script>
+const products = [
+  { id:1, name:"V2ray 1 ماهه 10 گیگ", desc:"مناسب استفاده روزمره", price:50000, cat:"VPN", icon:"🌐" },
+  { id:2, name:"V2ray 1 ماهه 20 گیگ", desc:"سرعت بالا، IP ثابت", price:100000, cat:"VPN", icon:"🌐" },
+  { id:3, name:"V2ray 1 ماهه 30 گیگ", desc:"برای مصرف متوسط", price:150000, cat:"VPN", icon:"🌐" },
+  { id:4, name:"V2ray 1 ماهه 40 گیگ", desc:"مناسب استریم", price:200000, cat:"VPN", icon:"🌐" },
+  { id:5, name:"V2ray 1 ماهه 60 گیگ", desc:"پلن حرفه‌ای", price:300000, cat:"VPN", icon:"🌐" },
+  { id:6, name:"V2ray 100 روزه 100 گیگ", desc:"پلن ویژه", price:500000, cat:"VPN", icon:"🌐" },
+  { id:7, name:"Cisco/OpenVPN/L2TP نامحدود", desc:"1 ماهه، تک‌کاربره، 3 پروتکل", price:350000, cat:"VPN", icon:"🛡" },
+  { id:8, name:"ChatGPT Plus", desc:"اکانت رسمی", price:0, cat:"AI", icon:"🧠" },
+  { id:9, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"AI", icon:"🟢" },
+  { id:10, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"AI", icon:"✨" },
+  { id:11, name:"پرمیوم تلگرام 3 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", icon:"📱" },
+  { id:12, name:"پرمیوم تلگرام 6 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", icon:"📱" },
+  { id:13, name:"پرمیوم تلگرام 12 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", icon:"📱" },
+  { id:14, name:"پرمیوم توییتر (X)", desc:"اکانت پرمیوم", price:0, cat:"Premium", icon:"🐦" },
+  { id:15, name:"گیفت‌کارت اپل 2$", desc:"Apple Gift Card", price:0, cat:"Gift", icon:"🍎" },
+  { id:16, name:"گیفت‌کارت اپل 10$", desc:"Apple Gift Card", price:0, cat:"Gift", icon:"🍎" },
+  { id:17, name:"گیفت‌کارت اپل 25$", desc:"Apple Gift Card", price:0, cat:"Gift", icon:"🍎" },
+  { id:18, name:"گیفت‌کارت اپل 50$", desc:"Apple Gift Card", price:0, cat:"Gift", icon:"🍎" },
+  { id:19, name:"گیفت‌کارت اپل 100$", desc:"Apple Gift Card", price:0, cat:"Gift", icon:"🍎" },
+];
+
+const categories = [
+  { key:"all", label:"همه" },
+  { key:"VPN", label:"VPN" },
+  { key:"AI", label:"هوش مصنوعی" },
+  { key:"Premium", label:"پرمیوم" },
+  { key:"Gift", label:"گیفت‌کارت" },
+];
+
+let activeCat = "all";
+
+function renderCategories() {
+  const el = document.getElementById('categories');
+  el.innerHTML = categories.map(c => 
+    `<button class="cat-btn ${c.key===activeCat?'active':''}" onclick="setCat('${c.key}')">${c.label}</button>`
+  ).join('');
+}
+
+function setCat(key) {
+  activeCat = key;
+  renderCategories();
+  renderProducts();
+}
+
+function formatPrice(p) {
+  if (!p) return "استعلام قیمت";
+  return p.toLocaleString('fa-IR') + " تومان";
+}
+
+function renderProducts() {
+  const el = document.getElementById('products');
+  const list = activeCat === 'all' ? products : products.filter(p => p.cat === activeCat);
+  el.innerHTML = list.map(p => `
+    <div class="card">
+      <div class="icon">${p.icon}</div>
+      <h3>${p.name}</h3>
+      <p>${p.desc}</p>
+      <div class="price">${formatPrice(p.price)}</div>
+      <button onclick="order('${p.name}')">🛒 سفارش</button>
+    </div>
+  `).join('');
+}
+
+function order(name) {
+  const url = `https://t.me/manager_1smart1?text=${encodeURIComponent('سلام، برای سفارش ' + name + ' راهنمایی می‌خوام')}`;
+  if (window.Telegram && Telegram.WebApp) {
+    Telegram.WebApp.openTelegramLink(url);
+  } else {
+    window.open(url, '_blank');
+  }
+}
+
+renderCategories();
+renderProducts();
+
+if (window.Telegram && Telegram.WebApp) {
+  Telegram.WebApp.ready();
+  Telegram.WebApp.expand();
+}
+</script>
+</body>
+</html>
