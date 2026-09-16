@@ -33,7 +33,7 @@ footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
 <body>
 <header>
   <h1>One Smart Shop</h1>
-  <p>خرید آنی سرویس‌های VPN و هوش مصنوعی</p>
+  <p>خرید آنی سرویس‌های VPN، هوش مصنوعی و خدمات موبایل</p>
 </header>
 <div class="categories" id="categories"></div>
 <div class="products" id="products"></div>
@@ -52,25 +52,35 @@ const products = [
   { id:4, name:"V2ray 1 ماهه 40 گیگ", desc:"مناسب استریم", price:200000, cat:"VPN", img: BASE + "v2ray.jpg" },
   { id:5, name:"V2ray 1 ماهه 60 گیگ", desc:"پلن حرفه‌ای", price:300000, cat:"VPN", img: BASE + "v2ray.jpg" },
   { id:6, name:"V2ray 100 روزه 100 گیگ", desc:"پلن ویژه", price:500000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:7, name:"Cisco/OpenVPN/L2TP", desc:"1 ماهه نامحدود، 3 پروتکل", price:350000, cat:"VPN", img: BASE + "cisco.png" },
+  { id:7, name:"Cisco / OpenVPN / L2TP", desc:"1 ماهه نامحدود، هر 3 پروتکل", price:350000, cat:"VPN", img: BASE + "cisco.png" },
+  { id:8, name:"L2TP اختصاصی", desc:"1 ماهه نامحدود، تک‌کاربره", price:250000, cat:"VPN", img: BASE + "l2tp.jpg" },
+  { id:9, name:"OpenVPN اختصاصی", desc:"1 ماهه نامحدود، تک‌کاربره", price:250000, cat:"VPN", img: BASE + "openvpn.jpg" },
 
   // --- AI ---
-  { id:8, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"AI", img: BASE + "chatgpt.png" },
-  { id:9, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"AI", img: BASE + "chatgptgo.png" },
-  { id:10, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"AI", img: BASE + "gemini.png" },
+  { id:10, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"AI", img: BASE + "chatgpt.png" },
+  { id:11, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"AI", img: BASE + "chatgptgo.png" },
+  { id:12, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"AI", img: BASE + "gemini.png" },
 
   // --- Premium ---
-  { id:11, name:"پرمیوم تلگرام 3 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:12, name:"پرمیوم تلگرام 6 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:13, name:"پرمیوم تلگرام 12 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:14, name:"پرمیوم توییتر (X)", desc:"اکانت پرمیوم X", price:0, cat:"Premium", img: BASE + "x.png" },
+  { id:13, name:"پرمیوم تلگرام 3 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
+  { id:14, name:"پرمیوم تلگرام 6 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
+  { id:15, name:"پرمیوم تلگرام 12 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
+  { id:16, name:"پرمیوم توییتر (X)", desc:"اکانت پرمیوم X", price:0, cat:"Premium", img: BASE + "x.png" },
 
   // --- Gift ---
-  { id:15, name:"گیفت‌کارت اپل 2$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:16, name:"گیفت‌کارت اپل 10$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:17, name:"گیفت‌کارت اپل 25$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:18, name:"گیفت‌کارت اپل 50$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:19, name:"گیفت‌کارت اپل 100$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  { id:17, name:"گیفت‌کارت اپل 2$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  { id:18, name:"گیفت‌کارت اپل 10$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  { id:19, name:"گیفت‌کارت اپل 25$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  { id:20, name:"گیفت‌کارت اپل 50$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  { id:21, name:"گیفت‌کارت اپل 100$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+
+  // --- رجیستری ---
+  { id:22, name:"رجیستری گوشی موبایل", desc:"ثبت گوشی روی کد ملی", price:0, cat:"Registry", img: BASE + "register.jpg" },
+
+  // --- Apple ID ---
+  { id:23, name:"Apple ID آماده", desc:"اکانت اپل آماده و فعال", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
+  { id:24, name:"Apple ID شخصی", desc:"با ایمیل و اطلاعات خودت", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
+  { id:25, name:"آنلاک Apple ID", desc:"رفع قفل اکانت اپل", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
 ];
 
 const categories = [
@@ -79,6 +89,8 @@ const categories = [
   { key:"AI", label:"هوش مصنوعی" },
   { key:"Premium", label:"پرمیوم" },
   { key:"Gift", label:"گیفت‌کارت" },
+  { key:"Registry", label:"رجیستری" },
+  { key:"AppleID", label:"Apple ID" },
 ];
 
 const SUPPORT_USERNAME = "manager_1smart1";
