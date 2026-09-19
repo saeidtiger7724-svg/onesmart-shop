@@ -23,6 +23,8 @@
   --bronze: #8b6f47;
   --text: #eef2ff;
   --muted: #7a849e;
+  --green: #22c55e;
+  --green-glow: rgba(34, 197, 94, 0.5);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 html, body {
@@ -310,6 +312,63 @@ html, body {
   box-shadow: 0 8px 32px rgba(74, 158, 255, 0.2);
 }
 .card:active::after { opacity: 1; }
+
+/* ⬇️ کارت تست رایگان - استایل سبز خاص ⬇️ */
+.card.trial-card {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
+  grid-column: 1 / -1;
+}
+.card.trial-card::before {
+  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.7), transparent);
+}
+.card.trial-card::after {
+  background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.3), transparent 65%);
+}
+.card.trial-card .img-box {
+  box-shadow:
+    inset 0 0 0 1px rgba(34, 197, 94, 0.3),
+    inset 0 0 20px rgba(34, 197, 94, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15),
+    0 0 0 1px rgba(34, 197, 94, 0.4),
+    0 0 0 3px rgba(20, 30, 20, 0.8),
+    0 0 0 4px rgba(34, 197, 94, 0.3),
+    0 6px 20px rgba(34, 197, 94, 0.3);
+}
+.card.trial-card .img-box::before {
+  background: radial-gradient(circle at 50% -10%, rgba(34, 197, 94, 0.5), transparent 60%);
+}
+.card.trial-card h3 {
+  background: linear-gradient(180deg, #ffffff, #86efac);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.card.trial-card .price {
+  background: linear-gradient(180deg, #ffffff 0%, #86efac 50%, #22c55e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.6));
+}
+.card.trial-card button {
+  background: linear-gradient(180deg, #86efac 0%, #22c55e 50%, #15803d 100%);
+  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4), 0 0 24px rgba(34, 197, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+.card.trial-card .badge-trial {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #22c55e, #15803d);
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.5);
+  letter-spacing: 0.5px;
+}
+
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -552,6 +611,9 @@ function toPersian(text) {
 }
 
 const products = [
+  // ⬇️⬇️⬇️ تست رایگان - بالای لیست VPN ⬇️⬇️⬇️
+  { id:0, name:"تست یک روزه یک گیگ", desc:"رایگان! فقط برای تست", price:0, cat:"vpn", img: BASE + "v2ray.jpg", isTrial:true },
+
   { id:1, name:"V2ray 10 GB", desc:"مناسب استفاده روزمره", price:50000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:2, name:"V2ray 20 GB", desc:"سرعت بالا، IP ثابت", price:100000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:3, name:"V2ray 30 GB", desc:"برای مصرف متوسط", price:150000, cat:"vpn", img: BASE + "v2ray.jpg" },
@@ -611,7 +673,7 @@ function setCat(key) {
 }
 
 function formatPrice(p) {
-  if (!p) return "استعلام";
+  if (!p) return "رایگان";
   return toPersian(p.toLocaleString('en-US')) + " تومان";
 }
 
@@ -627,19 +689,56 @@ function renderProducts() {
     return;
   }
   el.innerHTML = list.map((p, i) => {
+    const trialClass = p.isTrial ? 'trial-card' : '';
+    const badge = p.isTrial ? '<div class="badge-trial">🎁 رایگان</div>' : '';
+    const buttonText = p.isTrial ? '🎁 دریافت تست' : '🛒 سفارش';
+    const onclick = p.isTrial ? 'getTrial()' : `order(${p.id})`;
     return `
-    <div class="card" style="animation-delay: ${i * 0.04}s" onclick="order(${p.id})">
+    <div class="card ${trialClass}" style="animation-delay: ${i * 0.04}s" onclick="${onclick}">
+      ${badge}
       <div class="img-box"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
       <h3>${p.name}</h3>
       <div class="desc">${p.desc}</div>
       <div class="price">${formatPrice(p.price)}</div>
-      <button>🛒 سفارش</button>
+      <button>${buttonText}</button>
     </div>
   `;
   }).join('');
 }
 
-// ================= باز کردن ربات با پارامتر سفارش =================
+// ================= تست رایگان =================
+function getTrial() {
+  showToast('🎁 انتقال به تست رایگان...');
+  
+  const botUrl = `https://t.me/${BOT_USERNAME}?start=trial`;
+  const botTgUrl = `tg://resolve?domain=${BOT_USERNAME}&start=trial`;
+  
+  let opened = false;
+  try {
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(botUrl);
+      opened = true;
+    }
+  } catch(e) {}
+  
+  if (!opened) {
+    try { window.location.href = botTgUrl; opened = true; } catch(e) {}
+  }
+  
+  if (!opened) {
+    window.location.href = botUrl;
+  }
+  
+  setTimeout(() => {
+    try {
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.close) {
+        window.Telegram.WebApp.close();
+      }
+    } catch(e) {}
+  }, 600);
+}
+
+// ================= سفارش =================
 function order(productId) {
   showToast('⏳ انتقال به صفحه پرداخت...');
   
@@ -647,31 +746,21 @@ function order(productId) {
   const botTgUrl = `tg://resolve?domain=${BOT_USERNAME}&start=order_${productId}`;
   
   let opened = false;
-  
-  // روش ۱: تلگرام WebApp API (روش مطمئن)
   try {
-    if (window.Telegram && window.Telegram.WebApp) {
-      if (window.Telegram.WebApp.openTelegramLink) {
-        window.Telegram.WebApp.openTelegramLink(botUrl);
-        opened = true;
-      }
+    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
+      window.Telegram.WebApp.openTelegramLink(botUrl);
+      opened = true;
     }
   } catch(e) {}
   
-  // روش ۲: tg:// protocol
   if (!opened) {
-    try {
-      window.location.href = botTgUrl;
-      opened = true;
-    } catch(e) {}
+    try { window.location.href = botTgUrl; opened = true; } catch(e) {}
   }
   
-  // روش ۳: https معمولی
   if (!opened) {
     window.location.href = botUrl;
   }
   
-  // ⬇️⬇️⬇️ بستن مینی‌اپ بعد از انتقال ⬇️⬇️⬇️
   setTimeout(() => {
     try {
       if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.close) {
