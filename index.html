@@ -20,7 +20,7 @@ header p { font-size: 13px; color: var(--muted); }
 .card:active { transform: scale(0.97); border-color: var(--accent); }
 .card .img-box { width: 70px; height: 70px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; background: #0b1220; border-radius: 14px; padding: 8px; }
 .card .img-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
-.card h3 { font-size: 14px; margin-bottom: 6px; text-align: center; }
+.card h3 { font-size: 13px; margin-bottom: 6px; text-align: center; direction: ltr; }
 .card p { font-size: 12px; color: var(--muted); margin-bottom: 8px; flex: 1; text-align: center; }
 .card .price { font-size: 14px; font-weight: bold; color: var(--accent); margin-bottom: 8px; text-align: center; }
 .card button { background: var(--accent); color: #000; border: none; padding: 8px; border-radius: 10px; font-weight: bold; cursor: pointer; width: 100%; }
@@ -44,53 +44,59 @@ footer a { color: var(--accent); text-decoration: none; cursor: pointer; }
 <script>
 const BASE = "https://saeidtiger7724-svg.github.io/onesmart-shop/logos/";
 
+// تبدیل اعداد به فارسی
+function toPersian(text) {
+  const map = {'0':'۰','1':'۱','2':'۲','3':'۳','4':'۴','5':'۵','6':'۶','7':'۷','8':'۸','9':'۹'};
+  return String(text).replace(/[0-9]/g, d => map[d]);
+}
+
 const products = [
-  // --- VPN ---
-  { id:1, name:"V2ray 1 ماهه 10 گیگ", desc:"مناسب استفاده روزمره", price:50000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:2, name:"V2ray 1 ماهه 20 گیگ", desc:"سرعت بالا، IP ثابت", price:100000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:3, name:"V2ray 1 ماهه 30 گیگ", desc:"برای مصرف متوسط", price:150000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:4, name:"V2ray 1 ماهه 40 گیگ", desc:"مناسب استریم", price:200000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:5, name:"V2ray 1 ماهه 60 گیگ", desc:"پلن حرفه‌ای", price:300000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:6, name:"V2ray 100 روزه 100 گیگ", desc:"پلن ویژه", price:500000, cat:"VPN", img: BASE + "v2ray.jpg" },
-  { id:7, name:"Cisco / OpenVPN / L2TP", desc:"1 ماهه نامحدود، هر 3 پروتکل", price:350000, cat:"VPN", img: BASE + "cisco.png" },
-  { id:8, name:"L2TP اختصاصی", desc:"1 ماهه نامحدود، تک‌کاربره", price:300000, cat:"VPN", img: BASE + "l2tp.jpg" },
-  { id:9, name:"OpenVPN اختصاصی", desc:"1 ماهه نامحدود، تک‌کاربره", price:300000, cat:"VPN", img: BASE + "openvpn.jpg" },
+  // VPN
+  { id:1, name:"V2ray 10 GB", desc:"مناسب استفاده روزمره", price:50000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:2, name:"V2ray 20 GB", desc:"سرعت بالا، IP ثابت", price:100000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:3, name:"V2ray 30 GB", desc:"برای مصرف متوسط", price:150000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:4, name:"V2ray 40 GB", desc:"مناسب استریم", price:200000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:5, name:"V2ray 60 GB", desc:"پلن حرفه‌ای", price:300000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:6, name:"V2ray 100 GB - 100 Days", desc:"پلن ویژه", price:500000, cat:"vpn", img: BASE + "v2ray.jpg" },
+  { id:7, name:"Cisco - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "cisco.png" },
+  { id:8, name:"L2TP - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "l2tp.jpg" },
+  { id:9, name:"OpenVPN - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "openvpn.jpg" },
 
-  // --- AI ---
-  { id:10, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"AI", img: BASE + "chatgpt.png" },
-  { id:11, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"AI", img: BASE + "chatgptgo.png" },
-  { id:12, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"AI", img: BASE + "gemini.png" },
+  // AI
+  { id:10, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"ai", img: BASE + "chatgpt.png" },
+  { id:11, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"ai", img: BASE + "chatgptgo.png" },
+  { id:12, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"ai", img: BASE + "gemini.png" },
 
-  // --- Premium ---
-  { id:13, name:"پرمیوم تلگرام 3 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:14, name:"پرمیوم تلگرام 6 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:15, name:"پرمیوم تلگرام 12 ماهه", desc:"تحویل فوری", price:0, cat:"Premium", img: BASE + "telegram.png" },
-  { id:16, name:"پرمیوم توییتر (X)", desc:"اکانت پرمیوم X", price:0, cat:"Premium", img: BASE + "x.png" },
+  // Premium
+  { id:13, name:"Telegram Premium 3 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
+  { id:14, name:"Telegram Premium 6 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
+  { id:15, name:"Telegram Premium 12 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
+  { id:16, name:"Twitter Premium (X)", desc:"اکانت پرمیوم X", price:0, cat:"premium", img: BASE + "x.png" },
 
-  // --- Gift ---
-  { id:17, name:"گیفت‌کارت اپل 2$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:18, name:"گیفت‌کارت اپل 10$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:19, name:"گیفت‌کارت اپل 25$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:20, name:"گیفت‌کارت اپل 50$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
-  { id:21, name:"گیفت‌کارت اپل 100$", desc:"Apple Gift Card", price:0, cat:"Gift", img: BASE + "giftcartapple.png" },
+  // Gift
+  { id:17, name:"Apple Gift Card $2", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
+  { id:18, name:"Apple Gift Card $10", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
+  { id:19, name:"Apple Gift Card $25", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
+  { id:20, name:"Apple Gift Card $50", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
+  { id:21, name:"Apple Gift Card $100", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
 
-  // --- رجیستری ---
-  { id:22, name:"رجیستری گوشی موبایل", desc:"ثبت گوشی روی کد ملی", price:0, cat:"Registry", img: BASE + "register.jpg" },
+  // Registry
+  { id:22, name:"Mobile Registration", desc:"ثبت گوشی روی کد ملی", price:0, cat:"registry", img: BASE + "register.jpg" },
 
-  // --- Apple ID ---
-  { id:23, name:"Apple ID آماده", desc:"اکانت اپل آماده و فعال", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
-  { id:24, name:"Apple ID شخصی", desc:"با ایمیل و اطلاعات خودت", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
-  { id:25, name:"آنلاک Apple ID", desc:"رفع قفل اکانت اپل", price:0, cat:"AppleID", img: BASE + "appleid.jpg" },
+  // Apple ID
+  { id:23, name:"Apple ID Ready", desc:"اکانت اپل آماده و فعال", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
+  { id:24, name:"Apple ID Personal", desc:"با ایمیل و اطلاعات خودت", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
+  { id:25, name:"Apple ID Unlock", desc:"رفع قفل اکانت اپل", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
 ];
 
 const categories = [
   { key:"all", label:"همه" },
-  { key:"VPN", label:"VPN" },
-  { key:"AI", label:"هوش مصنوعی" },
-  { key:"Premium", label:"پرمیوم" },
-  { key:"Gift", label:"گیفت‌کارت" },
-  { key:"Registry", label:"رجیستری" },
-  { key:"AppleID", label:"Apple ID" },
+  { key:"vpn", label:"VPN" },
+  { key:"ai", label:"هوش مصنوعی" },
+  { key:"premium", label:"پرمیوم" },
+  { key:"gift", label:"گیفت‌کارت" },
+  { key:"registry", label:"رجیستری" },
+  { key:"appleid", label:"Apple ID" },
 ];
 
 const SUPPORT_USERNAME = "manager_1smart1";
@@ -111,7 +117,7 @@ function setCat(key) {
 
 function formatPrice(p) {
   if (!p) return "استعلام قیمت";
-  return p.toLocaleString('fa-IR') + " تومان";
+  return toPersian(p.toLocaleString('en-US')) + " تومان";
 }
 
 function renderProducts() {
