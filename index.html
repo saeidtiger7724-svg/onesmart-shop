@@ -646,24 +646,39 @@ function order(productId) {
   const botUrl = `https://t.me/${BOT_USERNAME}?start=order_${productId}`;
   const botTgUrl = `tg://resolve?domain=${BOT_USERNAME}&start=order_${productId}`;
   
+  let opened = false;
+  
   // روش ۱: تلگرام WebApp API (روش مطمئن)
   try {
     if (window.Telegram && window.Telegram.WebApp) {
       if (window.Telegram.WebApp.openTelegramLink) {
         window.Telegram.WebApp.openTelegramLink(botUrl);
-        return;
+        opened = true;
       }
     }
   } catch(e) {}
   
   // روش ۲: tg:// protocol
-  try {
-    window.location.href = botTgUrl;
-    return;
-  } catch(e) {}
+  if (!opened) {
+    try {
+      window.location.href = botTgUrl;
+      opened = true;
+    } catch(e) {}
+  }
   
   // روش ۳: https معمولی
-  window.location.href = botUrl;
+  if (!opened) {
+    window.location.href = botUrl;
+  }
+  
+  // ⬇️⬇️⬇️ بستن مینی‌اپ بعد از انتقال ⬇️⬇️⬇️
+  setTimeout(() => {
+    try {
+      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.close) {
+        window.Telegram.WebApp.close();
+      }
+    } catch(e) {}
+  }, 600);
 }
 
 function openTelegram(username, text) {
