@@ -13,17 +13,13 @@
   --card: rgba(160, 180, 220, 0.05);
   --card-hover: rgba(160, 180, 220, 0.09);
   --border: rgba(180, 200, 240, 0.1);
-  --border-bright: rgba(200, 220, 255, 0.35);
-  /* نقره‌ای کروم - اصلی */
   --silver-1: #e8eef8;
   --silver-2: #b8c4dc;
   --silver-3: #8892ac;
   --silver-4: #5a6280;
-  /* آبی نئون - تاکیدی */
   --neon-blue: #4a9eff;
   --neon-blue-bright: #6bb2ff;
   --neon-glow: rgba(74, 158, 255, 0.6);
-  /* برنز/مسی - فریم */
   --bronze: #8b6f47;
   --bronze-dark: #5a4528;
   --text: #eef2ff;
@@ -55,7 +51,6 @@ html, body {
     var(--bg-deep);
 }
 
-/* Grid dotted pattern (شبکه ماهواره‌ای مثل لوگو) */
 .bg-layer::before {
   content: '';
   position: absolute;
@@ -67,33 +62,15 @@ html, body {
   -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 75%);
 }
 
-/* Orbs نفسی */
 .orb {
   position: absolute;
   border-radius: 50%;
   filter: blur(120px);
   animation: float 24s ease-in-out infinite;
 }
-.orb-1 { 
-  width: 400px; height: 400px; 
-  background: radial-gradient(circle, #2a4a8f, transparent 70%);
-  top: -150px; right: -100px; 
-  opacity: 0.5;
-}
-.orb-2 { 
-  width: 350px; height: 350px; 
-  background: radial-gradient(circle, #3a2860, transparent 70%);
-  bottom: 10%; left: -130px; 
-  animation-delay: -8s;
-  opacity: 0.4;
-}
-.orb-3 { 
-  width: 300px; height: 300px; 
-  background: radial-gradient(circle, #4a9eff, transparent 70%);
-  top: 50%; right: -150px; 
-  opacity: 0.15;
-  animation-delay: -16s;
-}
+.orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #2a4a8f, transparent 70%); top: -150px; right: -100px; opacity: 0.5; }
+.orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, #3a2860, transparent 70%); bottom: 10%; left: -130px; animation-delay: -8s; opacity: 0.4; }
+.orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, #4a9eff, transparent 70%); top: 50%; right: -150px; opacity: 0.15; animation-delay: -16s; }
 
 @keyframes float {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -101,7 +78,6 @@ html, body {
   66% { transform: translate(-30px, 30px) scale(0.92); }
 }
 
-/* Stars + sparkles */
 .sparkle {
   position: absolute;
   width: 2px; height: 2px;
@@ -115,11 +91,9 @@ html, body {
   50% { opacity: 1; transform: scale(1); }
 }
 
-/* Diamond gems */
 .gem {
   position: absolute;
-  width: 6px;
-  height: 6px;
+  width: 6px; height: 6px;
   background: linear-gradient(135deg, #6bb2ff, #1e3a8a);
   border-radius: 1px;
   transform: rotate(45deg);
@@ -146,15 +120,6 @@ html, body {
   position: relative;
 }
 
-/* Frame ornament (قاب برنزی) */
-.frame {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.35;
-}
-
-/* ===== لوگو ===== */
 .logo-badge {
   width: 110px;
   height: 110px;
@@ -167,24 +132,19 @@ html, body {
   justify-content: center;
   font-size: 52px;
   position: relative;
-  /* قاب برنزی چندلایه مثل لوگو */
   box-shadow:
-    /* inner chrome ring */
     inset 0 0 0 2px rgba(200, 220, 255, 0.25),
     inset 0 0 30px rgba(74, 158, 255, 0.15),
     inset 0 2px 4px rgba(255, 255, 255, 0.2),
-    /* bronze outer frame */
     0 0 0 1px rgba(139, 111, 71, 0.5),
     0 0 0 6px rgba(30, 25, 18, 0.9),
     0 0 0 7px rgba(139, 111, 71, 0.4),
     0 0 0 10px rgba(30, 25, 18, 0.6),
-    /* blue glow */
     0 15px 50px rgba(74, 158, 255, 0.35),
     0 0 80px rgba(74, 158, 255, 0.2);
   animation: logoFloat 4s ease-in-out infinite;
 }
 
-/* حلقه پالس */
 .logo-badge::before {
   content: '';
   position: absolute;
@@ -212,11 +172,9 @@ html, body {
   100% { opacity: 0; transform: scale(1.15); }
 }
 
-/* الماس‌های دور لوگو - مثل لوگو */
 .logo-gem {
   position: absolute;
-  width: 8px;
-  height: 8px;
+  width: 8px; height: 8px;
   background: linear-gradient(135deg, #6bb2ff, #1e3a8a);
   border-radius: 2px;
   transform: rotate(45deg);
@@ -228,19 +186,12 @@ html, body {
 .lg-3 { top: 50%; left: -10px; animation-delay: -0.7s; }
 .lg-4 { top: 50%; right: -10px; animation-delay: -2.2s; }
 
-/* ===== تیتر ===== */
 .hero h1 {
   font-family: 'Orbitron', 'Vazirmatn', sans-serif;
   font-size: 28px;
   font-weight: 900;
   letter-spacing: 3px;
-  /* نقره‌ای براق با درخشش آبی */
-  background: linear-gradient(180deg, 
-    #ffffff 0%, 
-    #c8d4ec 35%,
-    #6bb2ff 50%,
-    #c8d4ec 65%,
-    #6a7090 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #c8d4ec 35%, #6bb2ff 50%, #c8d4ec 65%, #6a7090 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -268,7 +219,6 @@ html, body {
   margin-bottom: 22px;
 }
 
-/* ===== Stats ===== */
 .stats {
   display: flex;
   gap: 8px;
@@ -435,46 +385,52 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== تصویر محصول - با استایل گوی نورانی ===== */
+/* ===== تصویر محصول - فریم مربعی ===== */
 .img-box {
-  width: 72px;
-  height: 72px;
-  margin: 0 auto 12px;
-  border-radius: 50%;
+  width: 100%;
+  max-width: 110px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto 14px;
+  border-radius: 16px;
   background: 
     radial-gradient(circle at 35% 30%, #3a4a6a 0%, #1a2238 55%, #0a0e1a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 14px;
   position: relative;
   box-shadow:
+    /* خط داخلی نقره‌ای */
     inset 0 0 0 1px rgba(200, 220, 255, 0.15),
     inset 0 0 20px rgba(74, 158, 255, 0.15),
     inset 0 1px 2px rgba(255, 255, 255, 0.15),
-    0 0 0 1px rgba(139, 111, 71, 0.35),
-    0 0 0 3px rgba(20, 16, 12, 0.8),
-    0 0 0 4px rgba(139, 111, 71, 0.25),
-    0 6px 20px rgba(74, 158, 255, 0.2);
+    /* قاب برنزی چندلایه */
+    0 0 0 1px rgba(139, 111, 71, 0.5),
+    0 0 0 3px rgba(20, 16, 12, 0.9),
+    0 0 0 4px rgba(139, 111, 71, 0.4),
+    0 0 0 6px rgba(20, 16, 12, 0.5),
+    /* درخشش آبی بیرونی */
+    0 8px 24px rgba(74, 158, 255, 0.2);
+  overflow: hidden;
 }
 .img-box::before {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(circle at 50% -10%, rgba(74, 158, 255, 0.4), transparent 60%);
+  background: radial-gradient(circle at 50% -10%, rgba(74, 158, 255, 0.35), transparent 60%);
   pointer-events: none;
 }
 .img-box img {
   max-width: 100%;
   max-height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   position: relative;
   z-index: 1;
   filter: drop-shadow(0 2px 8px rgba(74, 158, 255, 0.5)) drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 
-/* ===== متن کارت ===== */
 .card h3 {
   font-size: 12.5px;
   font-weight: 700;
@@ -504,13 +460,7 @@ html, body {
   font-family: 'Orbitron', 'Vazirmatn', sans-serif;
   font-size: 14px;
   font-weight: 800;
-  /* نقره‌ای براق با درخشش آبی */
-  background: linear-gradient(180deg, 
-    #ffffff 0%, 
-    #c8d4ec 40%,
-    #6bb2ff 55%,
-    #c8d4ec 70%,
-    #8892ac 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #c8d4ec 40%, #6bb2ff 55%, #c8d4ec 70%, #8892ac 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -520,7 +470,6 @@ html, body {
   filter: drop-shadow(0 0 12px rgba(74, 158, 255, 0.5));
 }
 
-/* ===== دکمه کارت - نقره‌ای کروم ===== */
 .card button {
   background: linear-gradient(180deg, #e8eef8 0%, #b8c4dc 45%, #6a7590 100%);
   color: #060810;
@@ -621,7 +570,6 @@ html, body {
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ===== Empty ===== */
 .empty {
   grid-column: 1 / -1;
   text-align: center;
@@ -636,6 +584,7 @@ html, body {
   .card h3 { font-size: 11.5px; }
   .card .price { font-size: 13px; }
   .logo-badge { width: 96px; height: 96px; font-size: 44px; }
+  .img-box { max-width: 96px; }
 }
 </style>
 </head>
@@ -645,14 +594,12 @@ html, body {
   <div class="orb orb-1"></div>
   <div class="orb orb-2"></div>
   <div class="orb orb-3"></div>
-  <!-- ستاره‌های چشمک‌زن (مثل لوگو) -->
   <div class="sparkle" style="top: 12%; left: 18%; animation-delay: 0s;"></div>
   <div class="sparkle" style="top: 22%; right: 12%; animation-delay: 0.8s;"></div>
   <div class="sparkle" style="top: 45%; left: 8%; animation-delay: 1.6s;"></div>
   <div class="sparkle" style="top: 65%; right: 22%; animation-delay: 0.4s;"></div>
   <div class="sparkle" style="top: 38%; right: 45%; animation-delay: 2.2s;"></div>
   <div class="sparkle" style="top: 80%; left: 25%; animation-delay: 1.2s;"></div>
-  <!-- الماس‌های آبی (مثل لوگو) -->
   <div class="gem" style="top: 30%; right: 8%;"></div>
   <div class="gem" style="top: 72%; left: 6%; animation-delay: -1.5s;"></div>
 </div>
