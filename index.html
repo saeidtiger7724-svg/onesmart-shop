@@ -21,13 +21,10 @@
   --neon-blue-bright: #6bb2ff;
   --neon-glow: rgba(74, 158, 255, 0.6);
   --bronze: #8b6f47;
-  --bronze-dark: #5a4528;
   --text: #eef2ff;
-  --muted: #8b96b0;
+  --muted: #7a849e;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
 html, body {
   font-family: 'Vazirmatn', Tahoma, sans-serif;
   background: var(--bg);
@@ -36,8 +33,6 @@ html, body {
   overflow-x: hidden;
   padding-bottom: 100px;
 }
-
-/* ===== Background ===== */
 .bg-layer {
   position: fixed;
   inset: 0;
@@ -50,18 +45,15 @@ html, body {
     radial-gradient(ellipse at 100% 100%, rgba(40, 20, 60, 0.3) 0%, transparent 50%),
     var(--bg-deep);
 }
-
 .bg-layer::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: 
-    radial-gradient(circle, rgba(140, 170, 255, 0.08) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(140, 170, 255, 0.08) 1px, transparent 1px);
   background-size: 30px 30px;
   mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 75%);
   -webkit-mask-image: radial-gradient(ellipse at 50% 40%, black 20%, transparent 75%);
 }
-
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -71,13 +63,11 @@ html, body {
 .orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #2a4a8f, transparent 70%); top: -150px; right: -100px; opacity: 0.5; }
 .orb-2 { width: 350px; height: 350px; background: radial-gradient(circle, #3a2860, transparent 70%); bottom: 10%; left: -130px; animation-delay: -8s; opacity: 0.4; }
 .orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, #4a9eff, transparent 70%); top: 50%; right: -150px; opacity: 0.15; animation-delay: -16s; }
-
 @keyframes float {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(40px, -40px) scale(1.15); }
   66% { transform: translate(-30px, 30px) scale(0.92); }
 }
-
 .sparkle {
   position: absolute;
   width: 2px; height: 2px;
@@ -90,7 +80,6 @@ html, body {
   0%, 100% { opacity: 0; transform: scale(0); }
   50% { opacity: 1; transform: scale(1); }
 }
-
 .gem {
   position: absolute;
   width: 6px; height: 6px;
@@ -104,33 +93,18 @@ html, body {
   0%, 100% { opacity: 0.6; box-shadow: 0 0 8px rgba(107, 178, 255, 0.6); }
   50% { opacity: 1; box-shadow: 0 0 16px rgba(107, 178, 255, 1); }
 }
-
-.container {
-  position: relative;
-  z-index: 1;
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 0 14px;
-}
-
-/* ===== Hero ===== */
-.hero {
-  text-align: center;
-  padding: 40px 16px 26px;
-  position: relative;
-}
-
+.container { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 0 14px; }
+.hero { text-align: center; padding: 40px 16px 26px; position: relative; }
 .logo-badge {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   margin: 0 auto 22px;
   border-radius: 50%;
-  background: 
-    radial-gradient(circle at 35% 30%, #4a5878 0%, #1a2238 50%, #060810 100%);
+  background: radial-gradient(circle at 35% 30%, #4a5878 0%, #1a2238 50%, #060810 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 52px;
   position: relative;
   box-shadow:
     inset 0 0 0 2px rgba(200, 220, 255, 0.25),
@@ -144,7 +118,6 @@ html, body {
     0 0 80px rgba(74, 158, 255, 0.2);
   animation: logoFloat 4s ease-in-out infinite;
 }
-
 .logo-badge::before {
   content: '';
   position: absolute;
@@ -162,7 +135,6 @@ html, body {
   animation: ringPulse 3.5s ease-out infinite;
   animation-delay: 0.8s;
 }
-
 @keyframes logoFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
@@ -171,7 +143,6 @@ html, body {
   0% { opacity: 0.9; transform: scale(0.92); }
   100% { opacity: 0; transform: scale(1.15); }
 }
-
 .logo-gem {
   position: absolute;
   width: 8px; height: 8px;
@@ -185,7 +156,6 @@ html, body {
 .lg-2 { bottom: 8px; left: 12px; animation-delay: -1.5s; }
 .lg-3 { top: 50%; left: -10px; animation-delay: -0.7s; }
 .lg-4 { top: 50%; right: -10px; animation-delay: -2.2s; }
-
 .hero h1 {
   font-family: 'Orbitron', 'Vazirmatn', sans-serif;
   font-size: 28px;
@@ -196,12 +166,8 @@ html, body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 6px;
-  filter: 
-    drop-shadow(0 2px 0 rgba(30, 50, 100, 0.9))
-    drop-shadow(0 0 20px rgba(74, 158, 255, 0.6));
-  position: relative;
+  filter: drop-shadow(0 2px 0 rgba(30, 50, 100, 0.9)) drop-shadow(0 0 20px rgba(74, 158, 255, 0.6));
 }
-
 .hero .subtitle {
   font-family: 'Orbitron', sans-serif;
   font-size: 11px;
@@ -212,19 +178,8 @@ html, body {
   margin-bottom: 6px;
   text-shadow: 0 0 12px rgba(74, 158, 255, 0.4);
 }
-
-.hero .persian-sub {
-  font-size: 12px;
-  color: var(--muted);
-  margin-bottom: 22px;
-}
-
-.stats {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 8px;
-}
+.hero .persian-sub { font-size: 12px; color: var(--muted); margin-bottom: 22px; }
+.stats { display: flex; gap: 8px; justify-content: center; margin-bottom: 8px; }
 .stat {
   flex: 1;
   max-width: 140px;
@@ -233,7 +188,6 @@ html, body {
   border-radius: 14px;
   padding: 11px 6px;
   backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   position: relative;
   overflow: hidden;
 }
@@ -255,12 +209,7 @@ html, body {
   margin-bottom: 2px;
   text-shadow: 0 0 12px rgba(74, 158, 255, 0.3);
 }
-.stat-label {
-  font-size: 10px;
-  color: var(--muted);
-}
-
-/* ===== Search ===== */
+.stat-label { font-size: 10px; color: var(--muted); }
 .searchbar {
   margin: 0 auto 20px;
   max-width: 400px;
@@ -274,7 +223,7 @@ html, body {
   backdrop-filter: blur(12px);
   transition: 0.3s;
 }
-.searchbar:focus-within { 
+.searchbar:focus-within {
   border-color: rgba(74, 158, 255, 0.4);
   box-shadow: 0 0 24px rgba(74, 158, 255, 0.2);
 }
@@ -288,8 +237,6 @@ html, body {
   flex: 1;
 }
 .searchbar input::placeholder { color: var(--muted); }
-
-/* ===== Categories ===== */
 .cats-wrap {
   position: sticky;
   top: 0;
@@ -299,13 +246,7 @@ html, body {
   background: linear-gradient(180deg, rgba(6, 8, 16, 0.98) 60%, rgba(6, 8, 16, 0));
   backdrop-filter: blur(10px);
 }
-.categories {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 4px 0;
-  scrollbar-width: none;
-}
+.categories { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0; scrollbar-width: none; }
 .categories::-webkit-scrollbar { display: none; }
 .cat-btn {
   flex-shrink: 0;
@@ -328,25 +269,15 @@ html, body {
   color: #060810;
   border-color: transparent;
   font-weight: 800;
-  box-shadow: 
-    0 6px 24px rgba(74, 158, 255, 0.45),
-    0 0 40px rgba(74, 158, 255, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 24px rgba(74, 158, 255, 0.45), 0 0 40px rgba(74, 158, 255, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-
-/* ===== Products ===== */
-.products {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 24px;
-}
+.products { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
 .card {
   background: linear-gradient(180deg, rgba(160, 180, 220, 0.07) 0%, rgba(160, 180, 220, 0.02) 100%);
   border: 1px solid rgba(180, 200, 240, 0.1);
   border-radius: 20px;
-  padding: 14px 12px 12px;
+  padding: 14px 12px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -379,88 +310,67 @@ html, body {
   box-shadow: 0 8px 32px rgba(74, 158, 255, 0.2);
 }
 .card:active::after { opacity: 1; }
-
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
-
-/* ===== تصویر محصول - کوچیک و متعادل ===== */
 .img-box {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
   margin: 0 auto 12px;
-  border-radius: 14px;
-  background: 
-    radial-gradient(circle at 35% 30%, #3a4a6a 0%, #1a2238 55%, #0a0e1a 100%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #3a4a6a 0%, #1a2238 55%, #0a0e1a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 12px;
   position: relative;
   box-shadow:
     inset 0 0 0 1px rgba(200, 220, 255, 0.15),
     inset 0 0 20px rgba(74, 158, 255, 0.15),
     inset 0 1px 2px rgba(255, 255, 255, 0.15),
-    0 0 0 1px rgba(139, 111, 71, 0.5),
-    0 0 0 3px rgba(20, 16, 12, 0.9),
-    0 0 0 4px rgba(139, 111, 71, 0.4),
+    0 0 0 1px rgba(139, 111, 71, 0.35),
+    0 0 0 3px rgba(20, 16, 12, 0.8),
+    0 0 0 4px rgba(139, 111, 71, 0.25),
     0 6px 20px rgba(74, 158, 255, 0.2);
-  overflow: hidden;
 }
 .img-box::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% -10%, rgba(74, 158, 255, 0.35), transparent 60%);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% -10%, rgba(74, 158, 255, 0.4), transparent 60%);
   pointer-events: none;
 }
 .img-box img {
   max-width: 100%;
   max-height: 100%;
-  width: 100%;
-  height: 100%;
   object-fit: contain;
   position: relative;
   z-index: 1;
   filter: drop-shadow(0 2px 8px rgba(74, 158, 255, 0.5)) drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
-
-/* ===== عنوان محصول - بزرگ‌تر ===== */
 .card h3 {
-  font-size: 14px;
+  font-size: 12.5px;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-align: center;
   direction: ltr;
-  line-height: 1.4;
-  min-height: 40px;
+  line-height: 1.35;
+  min-height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #ffffff, #c8d4ec);
+  background: linear-gradient(180deg, #ffffff, #b8c4dc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 10px rgba(74, 158, 255, 0.3);
-  letter-spacing: 0.1px;
+  text-shadow: 0 0 10px rgba(74, 158, 255, 0.2);
 }
-
-/* ===== توضیحات - خواناتر ===== */
-.card .desc {
-  font-size: 12px;
-  color: #9aa4bc;
-  margin-bottom: 12px;
-  text-align: center;
-  line-height: 1.5;
-  min-height: 32px;
-  font-weight: 500;
-}
-
-/* ===== قیمت - بزرگ‌تر و برجسته‌تر ===== */
+.card .desc { font-size: 10.5px; color: var(--muted); margin-bottom: 10px; text-align: center; line-height: 1.4; min-height: 28px; }
 .card .price {
   font-family: 'Orbitron', 'Vazirmatn', sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 800;
   background: linear-gradient(180deg, #ffffff 0%, #c8d4ec 40%, #6bb2ff 55%, #c8d4ec 70%, #8892ac 100%);
   -webkit-background-clip: text;
@@ -468,32 +378,25 @@ html, body {
   background-clip: text;
   text-align: center;
   margin-bottom: 12px;
-  letter-spacing: -0.2px;
-  filter: drop-shadow(0 0 12px rgba(74, 158, 255, 0.6));
+  letter-spacing: -0.3px;
+  filter: drop-shadow(0 0 12px rgba(74, 158, 255, 0.5));
 }
-
-/* ===== دکمه - بزرگ‌تر ===== */
 .card button {
   background: linear-gradient(180deg, #e8eef8 0%, #b8c4dc 45%, #6a7590 100%);
   color: #060810;
   border: none;
-  padding: 11px;
+  padding: 10px;
   border-radius: 12px;
   font-weight: 800;
   cursor: pointer;
   width: 100%;
   font-family: inherit;
-  font-size: 13.5px;
+  font-size: 12.5px;
   position: relative;
   overflow: hidden;
   transition: 0.3s;
-  box-shadow: 
-    0 4px 16px rgba(74, 158, 255, 0.3),
-    0 0 24px rgba(74, 158, 255, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7),
-    inset 0 -1px 0 rgba(60, 80, 130, 0.4);
+  box-shadow: 0 4px 16px rgba(74, 158, 255, 0.3), 0 0 24px rgba(74, 158, 255, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -1px 0 rgba(60, 80, 130, 0.4);
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  letter-spacing: 0.2px;
 }
 .card button::after {
   content: '';
@@ -504,8 +407,6 @@ html, body {
   transition: left 0.6s;
 }
 .card:active button::after { left: 100%; }
-
-/* ===== Bottom Bar ===== */
 .bottom-bar {
   position: fixed;
   bottom: 0;
@@ -544,14 +445,10 @@ html, body {
   background: linear-gradient(180deg, #e8eef8 0%, #b8c4dc 45%, #6a7590 100%);
   color: #060810;
   border-color: transparent;
-  box-shadow: 
-    0 6px 24px rgba(74, 158, 255, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 6px 24px rgba(74, 158, 255, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   font-weight: 800;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
-
-/* ===== Toast ===== */
 .toast {
   position: fixed;
   bottom: 110px;
@@ -567,36 +464,17 @@ html, body {
   opacity: 0;
   pointer-events: none;
   transition: all 0.3s;
-  box-shadow: 
-    0 8px 32px rgba(74, 158, 255, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(74, 158, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-.empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted);
-}
+.empty { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--muted); }
 .empty .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-
-/* ===== موبایل کوچک ===== */
-@media (max-width: 400px) {
+@media (max-width: 360px) {
   .hero h1 { font-size: 24px; letter-spacing: 2px; }
   .stat-num { font-size: 14px; }
-  .logo-badge { width: 90px; height: 90px; font-size: 42px; }
-  .card h3 { font-size: 13px; }
-  .card .price { font-size: 15px; }
-  .img-box { width: 64px; height: 64px; }
-}
-
-@media (max-width: 340px) {
-  .card h3 { font-size: 12px; }
-  .card .desc { font-size: 11px; }
-  .card .price { font-size: 14px; }
-  .img-box { width: 58px; height: 58px; padding: 8px; }
-  .card button { font-size: 12.5px; padding: 10px; }
+  .card h3 { font-size: 11.5px; }
+  .card .price { font-size: 13px; }
+  .logo-badge { width: 96px; height: 96px; font-size: 44px; }
 }
 </style>
 </head>
@@ -617,7 +495,6 @@ html, body {
 </div>
 
 <div class="container">
-
   <div class="hero">
     <div class="logo-badge">
       🛒
@@ -656,7 +533,6 @@ html, body {
   </div>
 
   <div class="products" id="products"></div>
-
 </div>
 
 <div class="bottom-bar">
@@ -666,6 +542,7 @@ html, body {
 
 <script>
 const BASE = "https://saeidtiger7724-svg.github.io/onesmart-shop/logos/";
+const BOT_USERNAME = "onesmart1_bot";
 const SUPPORT_USERNAME = "manager_1smart1";
 const CHANNEL_URL = "https://t.me/supprt_1smart1";
 
@@ -741,21 +618,17 @@ function formatPrice(p) {
 function renderProducts() {
   const el = document.getElementById('products');
   let list = activeCat === 'all' ? products : products.filter(p => p.cat === activeCat);
-
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
     list = list.filter(p => p.name.toLowerCase().includes(q) || p.desc.includes(searchQuery));
   }
-
   if (list.length === 0) {
     el.innerHTML = `<div class="empty"><div class="icon">🔍</div>محصولی یافت نشد</div>`;
     return;
   }
-
   el.innerHTML = list.map((p, i) => {
-    const safeName = p.name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
     return `
-    <div class="card" style="animation-delay: ${i * 0.04}s" onclick="order('${safeName}')">
+    <div class="card" style="animation-delay: ${i * 0.04}s" onclick="order(${p.id})">
       <div class="img-box"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
       <h3>${p.name}</h3>
       <div class="desc">${p.desc}</div>
@@ -764,6 +637,33 @@ function renderProducts() {
     </div>
   `;
   }).join('');
+}
+
+// ================= باز کردن ربات با پارامتر سفارش =================
+function order(productId) {
+  showToast('⏳ انتقال به صفحه پرداخت...');
+  
+  const botUrl = `https://t.me/${BOT_USERNAME}?start=order_${productId}`;
+  const botTgUrl = `tg://resolve?domain=${BOT_USERNAME}&start=order_${productId}`;
+  
+  // روش ۱: تلگرام WebApp API (روش مطمئن)
+  try {
+    if (window.Telegram && window.Telegram.WebApp) {
+      if (window.Telegram.WebApp.openTelegramLink) {
+        window.Telegram.WebApp.openTelegramLink(botUrl);
+        return;
+      }
+    }
+  } catch(e) {}
+  
+  // روش ۲: tg:// protocol
+  try {
+    window.location.href = botTgUrl;
+    return;
+  } catch(e) {}
+  
+  // روش ۳: https معمولی
+  window.location.href = botUrl;
 }
 
 function openTelegram(username, text) {
@@ -793,11 +693,6 @@ function showToast(msg) {
   toast.textContent = msg;
   setTimeout(() => toast.classList.add('show'), 10);
   setTimeout(() => toast.classList.remove('show'), 1800);
-}
-
-function order(name) {
-  showToast('⏳ انتقال به پشتیبانی...');
-  openTelegram(SUPPORT_USERNAME, 'سلام، برای سفارش ' + name + ' راهنمایی می‌خوام');
 }
 
 function openSupport() {
