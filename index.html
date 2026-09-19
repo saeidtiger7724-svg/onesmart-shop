@@ -23,7 +23,7 @@
   --bronze: #8b6f47;
   --bronze-dark: #5a4528;
   --text: #eef2ff;
-  --muted: #7a849e;
+  --muted: #8b96b0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -121,8 +121,8 @@ html, body {
 }
 
 .logo-badge {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto 22px;
   border-radius: 50%;
   background: 
@@ -130,7 +130,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 52px;
+  font-size: 48px;
   position: relative;
   box-shadow:
     inset 0 0 0 2px rgba(200, 220, 255, 0.25),
@@ -339,14 +339,14 @@ html, body {
 .products {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 24px;
 }
 .card {
   background: linear-gradient(180deg, rgba(160, 180, 220, 0.07) 0%, rgba(160, 180, 220, 0.02) 100%);
   border: 1px solid rgba(180, 200, 240, 0.1);
   border-radius: 20px;
-  padding: 14px 12px;
+  padding: 14px 12px 12px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -385,32 +385,27 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== تصویر محصول - فریم مربعی ===== */
+/* ===== تصویر محصول - کوچیک و متعادل ===== */
 .img-box {
-  width: 100%;
-  max-width: 110px;
-  aspect-ratio: 1 / 1;
-  margin: 0 auto 14px;
-  border-radius: 16px;
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 12px;
+  border-radius: 14px;
   background: 
     radial-gradient(circle at 35% 30%, #3a4a6a 0%, #1a2238 55%, #0a0e1a 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 14px;
+  padding: 10px;
   position: relative;
   box-shadow:
-    /* خط داخلی نقره‌ای */
     inset 0 0 0 1px rgba(200, 220, 255, 0.15),
     inset 0 0 20px rgba(74, 158, 255, 0.15),
     inset 0 1px 2px rgba(255, 255, 255, 0.15),
-    /* قاب برنزی چندلایه */
     0 0 0 1px rgba(139, 111, 71, 0.5),
     0 0 0 3px rgba(20, 16, 12, 0.9),
     0 0 0 4px rgba(139, 111, 71, 0.4),
-    0 0 0 6px rgba(20, 16, 12, 0.5),
-    /* درخشش آبی بیرونی */
-    0 8px 24px rgba(74, 158, 255, 0.2);
+    0 6px 20px rgba(74, 158, 255, 0.2);
   overflow: hidden;
 }
 .img-box::before {
@@ -431,34 +426,41 @@ html, body {
   filter: drop-shadow(0 2px 8px rgba(74, 158, 255, 0.5)) drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 
+/* ===== عنوان محصول - بزرگ‌تر ===== */
 .card h3 {
-  font-size: 12.5px;
+  font-size: 14px;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-align: center;
   direction: ltr;
-  line-height: 1.35;
-  min-height: 36px;
+  line-height: 1.4;
+  min-height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(180deg, #ffffff, #b8c4dc);
+  background: linear-gradient(180deg, #ffffff, #c8d4ec);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: 0 0 10px rgba(74, 158, 255, 0.2);
+  text-shadow: 0 0 10px rgba(74, 158, 255, 0.3);
+  letter-spacing: 0.1px;
 }
+
+/* ===== توضیحات - خواناتر ===== */
 .card .desc {
-  font-size: 10.5px;
-  color: var(--muted);
-  margin-bottom: 10px;
+  font-size: 12px;
+  color: #9aa4bc;
+  margin-bottom: 12px;
   text-align: center;
-  line-height: 1.4;
-  min-height: 28px;
+  line-height: 1.5;
+  min-height: 32px;
+  font-weight: 500;
 }
+
+/* ===== قیمت - بزرگ‌تر و برجسته‌تر ===== */
 .card .price {
   font-family: 'Orbitron', 'Vazirmatn', sans-serif;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 800;
   background: linear-gradient(180deg, #ffffff 0%, #c8d4ec 40%, #6bb2ff 55%, #c8d4ec 70%, #8892ac 100%);
   -webkit-background-clip: text;
@@ -466,21 +468,22 @@ html, body {
   background-clip: text;
   text-align: center;
   margin-bottom: 12px;
-  letter-spacing: -0.3px;
-  filter: drop-shadow(0 0 12px rgba(74, 158, 255, 0.5));
+  letter-spacing: -0.2px;
+  filter: drop-shadow(0 0 12px rgba(74, 158, 255, 0.6));
 }
 
+/* ===== دکمه - بزرگ‌تر ===== */
 .card button {
   background: linear-gradient(180deg, #e8eef8 0%, #b8c4dc 45%, #6a7590 100%);
   color: #060810;
   border: none;
-  padding: 10px;
+  padding: 11px;
   border-radius: 12px;
   font-weight: 800;
   cursor: pointer;
   width: 100%;
   font-family: inherit;
-  font-size: 12.5px;
+  font-size: 13.5px;
   position: relative;
   overflow: hidden;
   transition: 0.3s;
@@ -578,13 +581,22 @@ html, body {
 }
 .empty .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
 
-@media (max-width: 360px) {
+/* ===== موبایل کوچک ===== */
+@media (max-width: 400px) {
   .hero h1 { font-size: 24px; letter-spacing: 2px; }
   .stat-num { font-size: 14px; }
-  .card h3 { font-size: 11.5px; }
-  .card .price { font-size: 13px; }
-  .logo-badge { width: 96px; height: 96px; font-size: 44px; }
-  .img-box { max-width: 96px; }
+  .logo-badge { width: 90px; height: 90px; font-size: 42px; }
+  .card h3 { font-size: 13px; }
+  .card .price { font-size: 15px; }
+  .img-box { width: 64px; height: 64px; }
+}
+
+@media (max-width: 340px) {
+  .card h3 { font-size: 12px; }
+  .card .desc { font-size: 11px; }
+  .card .price { font-size: 14px; }
+  .img-box { width: 58px; height: 58px; padding: 8px; }
+  .card button { font-size: 12.5px; padding: 10px; }
 }
 </style>
 </head>
