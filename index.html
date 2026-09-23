@@ -313,7 +313,6 @@ html, body {
 }
 .card:active::after { opacity: 1; }
 
-/* ⬇️ کارت تست رایگان - استایل سبز خاص ⬇️ */
 .card.trial-card {
   border-color: rgba(34, 197, 94, 0.3);
   background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
@@ -610,20 +609,25 @@ function toPersian(text) {
   return String(text).replace(/[0-9]/g, d => map[d]);
 }
 
+// ✅ ترتیب جدید: اول VPN‌های دیگه، بعد V2ray‌ها، و تست آخر همه
 const products = [
-  // ⬇️⬇️⬇️ تست رایگان - بالای لیست VPN ⬇️⬇️⬇️
-  { id:0, name:"تست یک روزه یک گیگ", desc:"رایگان! فقط برای تست", price:0, cat:"vpn", img: BASE + "v2ray.jpg", isTrial:true },
+  // ===== VPN - اول سایر VPNها =====
+  { id:7, name:"Cisco - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "cisco.png" },
+  { id:8, name:"L2TP - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "l2tp.jpg" },
+  { id:9, name:"OpenVPN - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "openvpn.jpg" },
 
+  // ===== V2ray - بعد از سایر VPNها =====
   { id:1, name:"V2ray 10 GB", desc:"مناسب استفاده روزمره", price:50000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:2, name:"V2ray 20 GB", desc:"سرعت بالا، IP ثابت", price:100000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:3, name:"V2ray 30 GB", desc:"برای مصرف متوسط", price:150000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:4, name:"V2ray 40 GB", desc:"مناسب استریم", price:200000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:5, name:"V2ray 60 GB", desc:"پلن حرفه‌ای", price:300000, cat:"vpn", img: BASE + "v2ray.jpg" },
   { id:6, name:"V2ray 100 GB - 100 Days", desc:"پلن ویژه", price:500000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:7, name:"Cisco - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "cisco.png" },
-  { id:8, name:"L2TP - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "l2tp.jpg" },
-  { id:9, name:"OpenVPN - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "openvpn.jpg" },
 
+  // ===== تست رایگان - آخر همه V2rayها =====
+  { id:0, name:"تست یک روزه یک گیگ", desc:"رایگان! فقط برای تست", price:0, cat:"vpn", img: BASE + "v2ray.jpg", isTrial:true },
+
+  // ===== بقیه دسته‌بندی‌ها =====
   { id:10, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"ai", img: BASE + "chatgpt.png" },
   { id:11, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"ai", img: BASE + "chatgptgo.png" },
   { id:12, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"ai", img: BASE + "gemini.png" },
