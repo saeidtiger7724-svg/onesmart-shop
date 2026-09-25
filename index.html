@@ -313,61 +313,6 @@ html, body {
 }
 .card:active::after { opacity: 1; }
 
-.card.trial-card {
-  border-color: rgba(34, 197, 94, 0.3);
-  background: linear-gradient(180deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.02) 100%);
-  grid-column: 1 / -1;
-}
-.card.trial-card::before {
-  background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.7), transparent);
-}
-.card.trial-card::after {
-  background: radial-gradient(circle at 50% 0%, rgba(34, 197, 94, 0.3), transparent 65%);
-}
-.card.trial-card .img-box {
-  box-shadow:
-    inset 0 0 0 1px rgba(34, 197, 94, 0.3),
-    inset 0 0 20px rgba(34, 197, 94, 0.2),
-    inset 0 1px 2px rgba(255, 255, 255, 0.15),
-    0 0 0 1px rgba(34, 197, 94, 0.4),
-    0 0 0 3px rgba(20, 30, 20, 0.8),
-    0 0 0 4px rgba(34, 197, 94, 0.3),
-    0 6px 20px rgba(34, 197, 94, 0.3);
-}
-.card.trial-card .img-box::before {
-  background: radial-gradient(circle at 50% -10%, rgba(34, 197, 94, 0.5), transparent 60%);
-}
-.card.trial-card h3 {
-  background: linear-gradient(180deg, #ffffff, #86efac);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-.card.trial-card .price {
-  background: linear-gradient(180deg, #ffffff 0%, #86efac 50%, #22c55e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.6));
-}
-.card.trial-card button {
-  background: linear-gradient(180deg, #86efac 0%, #22c55e 50%, #15803d 100%);
-  box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4), 0 0 24px rgba(34, 197, 94, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-}
-.card.trial-card .badge-trial {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: linear-gradient(135deg, #22c55e, #15803d);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(34, 197, 94, 0.5);
-  letter-spacing: 0.5px;
-}
-
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -609,42 +554,29 @@ function toPersian(text) {
   return String(text).replace(/[0-9]/g, d => map[d]);
 }
 
-// ✅ ترتیب جدید: اول VPN‌های دیگه، بعد V2ray‌ها، و تست آخر همه
 const products = [
-  // ===== VPN - اول سایر VPNها =====
-  { id:7, name:"Cisco - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "cisco.png" },
-  { id:8, name:"L2TP - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "l2tp.jpg" },
-  { id:9, name:"OpenVPN - 1 Month - Unlimited", desc:"نامحدود، تک‌کاربره", price:350000, cat:"vpn", img: BASE + "openvpn.jpg" },
-
-  // ===== V2ray - بعد از سایر VPNها =====
-  { id:1, name:"V2ray 10 GB", desc:"مناسب استفاده روزمره", price:50000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:2, name:"V2ray 20 GB", desc:"سرعت بالا، IP ثابت", price:100000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:3, name:"V2ray 30 GB", desc:"برای مصرف متوسط", price:150000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:4, name:"V2ray 40 GB", desc:"مناسب استریم", price:200000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:5, name:"V2ray 60 GB", desc:"پلن حرفه‌ای", price:300000, cat:"vpn", img: BASE + "v2ray.jpg" },
-  { id:6, name:"V2ray 100 GB - 100 Days", desc:"پلن ویژه", price:500000, cat:"vpn", img: BASE + "v2ray.jpg" },
-
-  // ===== تست رایگان - آخر همه V2rayها =====
-  { id:0, name:"تست یک روزه یک گیگ", desc:"رایگان! فقط برای تست", price:0, cat:"vpn", img: BASE + "v2ray.jpg", isTrial:true },
-
-  // ===== بقیه دسته‌بندی‌ها =====
+  // ===== هوش مصنوعی =====
   { id:10, name:"ChatGPT Plus", desc:"اکانت رسمی OpenAI", price:0, cat:"ai", img: BASE + "chatgpt.png" },
   { id:11, name:"ChatGPT Go", desc:"اکانت اقتصادی", price:0, cat:"ai", img: BASE + "chatgptgo.png" },
   { id:12, name:"Gemini Pro", desc:"اکانت پرمیوم گوگل", price:0, cat:"ai", img: BASE + "gemini.png" },
 
+  // ===== پرمیوم =====
   { id:13, name:"Telegram Premium 3 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
   { id:14, name:"Telegram Premium 6 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
   { id:15, name:"Telegram Premium 12 Months", desc:"تحویل فوری", price:0, cat:"premium", img: BASE + "telegram.png" },
   { id:16, name:"Twitter Premium (X)", desc:"اکانت پرمیوم X", price:0, cat:"premium", img: BASE + "x.png" },
 
+  // ===== گیفت کارت =====
   { id:17, name:"Apple Gift Card $2", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
   { id:18, name:"Apple Gift Card $10", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
   { id:19, name:"Apple Gift Card $25", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
   { id:20, name:"Apple Gift Card $50", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
   { id:21, name:"Apple Gift Card $100", desc:"Apple Gift Card", price:0, cat:"gift", img: BASE + "giftcartapple.png" },
 
+  // ===== رجیستری =====
   { id:22, name:"Mobile Registration", desc:"ثبت گوشی روی کد ملی", price:0, cat:"registry", img: BASE + "register.jpg" },
 
+  // ===== Apple ID =====
   { id:23, name:"Apple ID Ready", desc:"اکانت اپل آماده و فعال", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
   { id:24, name:"Apple ID Personal", desc:"با ایمیل و اطلاعات خودت", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
   { id:25, name:"Apple ID Unlock", desc:"رفع قفل اکانت اپل", price:0, cat:"appleid", img: BASE + "appleid.jpg" },
@@ -652,7 +584,6 @@ const products = [
 
 const categories = [
   { key:"all", label:"✨ همه" },
-  { key:"vpn", label:"🌐 VPN" },
   { key:"ai", label:"🧠 هوش مصنوعی" },
   { key:"premium", label:"📱 پرمیوم" },
   { key:"gift", label:"🍎 گیفت‌کارت" },
@@ -693,53 +624,16 @@ function renderProducts() {
     return;
   }
   el.innerHTML = list.map((p, i) => {
-    const trialClass = p.isTrial ? 'trial-card' : '';
-    const badge = p.isTrial ? '<div class="badge-trial">🎁 رایگان</div>' : '';
-    const buttonText = p.isTrial ? '🎁 دریافت تست' : '🛒 سفارش';
-    const onclick = p.isTrial ? 'getTrial()' : `order(${p.id})`;
     return `
-    <div class="card ${trialClass}" style="animation-delay: ${i * 0.04}s" onclick="${onclick}">
-      ${badge}
+    <div class="card" style="animation-delay: ${i * 0.04}s" onclick="order(${p.id})">
       <div class="img-box"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
       <h3>${p.name}</h3>
       <div class="desc">${p.desc}</div>
       <div class="price">${formatPrice(p.price)}</div>
-      <button>${buttonText}</button>
+      <button>🛒 سفارش</button>
     </div>
   `;
   }).join('');
-}
-
-// ================= تست رایگان =================
-function getTrial() {
-  showToast('🎁 انتقال به تست رایگان...');
-  
-  const botUrl = `https://t.me/${BOT_USERNAME}?start=trial`;
-  const botTgUrl = `tg://resolve?domain=${BOT_USERNAME}&start=trial`;
-  
-  let opened = false;
-  try {
-    if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.openTelegramLink) {
-      window.Telegram.WebApp.openTelegramLink(botUrl);
-      opened = true;
-    }
-  } catch(e) {}
-  
-  if (!opened) {
-    try { window.location.href = botTgUrl; opened = true; } catch(e) {}
-  }
-  
-  if (!opened) {
-    window.location.href = botUrl;
-  }
-  
-  setTimeout(() => {
-    try {
-      if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.close) {
-        window.Telegram.WebApp.close();
-      }
-    } catch(e) {}
-  }, 600);
 }
 
 // ================= سفارش =================
